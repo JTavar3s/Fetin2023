@@ -7,6 +7,7 @@ import { FaImages } from 'react-icons/fa';
 import CameraInput from '../../components/CameraInput';
 import { signup } from '../../services/axios';
 import { useState } from 'react';
+import { addPhoto } from '../../services/axios';
 
 type FormValues = {
   name: string;
@@ -18,31 +19,42 @@ type FormValues = {
 
 export function CreateAccount(): JSX.Element {
   const { register, handleSubmit, formState } = useForm<FormValues>();
-  const [img, setImg] = useState<string[]>([]);
+  const [img, setImg] = useState();
   const navigate = useNavigate();
 
   const onSubmit = (data: FormValues) => {
     const user = {
+      name: data.name,
       email: data.email,
       phone: data.phone,
-      password: data.password,
-      codeAdm: data.codeAdm,
-      image: img
+      password: data.password
     }
+    console.log(user)
+    
     signup(user)
       .then(resp => {
         console.log(resp)
-        navigate('/')
+        if(resp.data.register){
+          localStorage.setItem('register', JSON.stringify(resp.data.register));
+          localStorage.setItem('resident', JSON.stringify(resp.data.resident));
+          navigate('/')
+        }
       })
       .catch(error => {
         console.log(error)
       })
   };
 
-  const handleCapture = (imageData: string) => {
-    img.push(imageData)
-    setImg(img)
-  };
+  const handleCapture = (img: any) => {
+    addPhoto(img).then((v)=> {
+      console.warn(v)
+    }).catch((e) => {
+      console.log(e)
+    })
+    console.log(img)
+  }
+
+  
 
   return (
     <Styled.Container>
@@ -50,7 +62,7 @@ export function CreateAccount(): JSX.Element {
         <Styled.Title>Crie sua conta</Styled.Title>
         <Styled.Form onSubmit={handleSubmit(onSubmit)}>
           <Styled.Image>
-            <CameraInput onCapture={handleCapture} />
+            <CameraInput onCapture={handleCapture}/>
           </Styled.Image>
 
           <Styled.Label>
@@ -108,8 +120,8 @@ export function CreateAccount(): JSX.Element {
             <Styled.Button onClick={() => navigate(`/`)} disabled={formState.isSubmitting}>
               {formState.isSubmitting ? 'Aguarde...' : 'voltar'}
             </Styled.Button>
-            <Styled.Button type="submit" disabled={formState.isSubmitting}>
-              {formState.isSubmitting ? 'Aguarde...' : 'entrar'}
+            <Styled.Button onClick={() => navigate('/') } type="submit" disabled={formState.isSubmitting}>
+              {formState.isSubmitting ? 'Aguarde...' : 'cadastrar'}
             </Styled.Button>
           </Styled.divButton>
         </Styled.Form>

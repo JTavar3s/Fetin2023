@@ -36,7 +36,6 @@ export function CreatVisitant(): JSX.Element {
       .catch(error => {
         console.log(error)
       })
-    navigate('/home')
   };
 
   return (

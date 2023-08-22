@@ -36,10 +36,18 @@ export const login = async (user: any) => {
 };
 
 export const signup = async (user: any) => {
-  config.url = 'signup'
+  config.url = 'register'
   config.method = 'post'
   config.data = user
   return axios.request<any>(config);
+}
+
+export const addPhoto = async (image: any) => {
+  config.url = 'add-photo'
+  config.method = 'post'
+  let formData = new FormData()
+  formData.set('foto', image)
+  return axios.post('add-photo', formData)
 }
 
 export const loadUserResident = async (idResident: number) => {

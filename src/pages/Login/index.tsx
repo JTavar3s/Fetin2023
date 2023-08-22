@@ -3,6 +3,7 @@ import * as Styled from './styled';
 import { useNavigate } from 'react-router';
 import RotateBanner from '../../components/RotateBanner';
 import { login } from '../../services/axios';
+import Swal from 'sweetalert2'
 
 type FormValues = {
   email: string;
@@ -21,14 +22,23 @@ export function LoginPage(): JSX.Element {
     login(user)
       .then(resp => {
         console.log(resp)
-        if(resp.data.user){
-          localStorage.setItem('user', JSON.stringify(resp.data.user));
+        if(resp.data){
+          localStorage.setItem('user', JSON.stringify(resp.data));
           localStorage.setItem('resident', JSON.stringify(resp.data.resident));
           navigate('/home')
         }
       })
       .catch(error => {
         console.log(error)
+        Swal.fire({
+          title: 'Login ou Senha incorretos',
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          }
+        })
         //TODO: escrever mesnagem de erro de login
       })
   };
