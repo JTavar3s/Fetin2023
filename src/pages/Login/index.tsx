@@ -28,7 +28,7 @@ export function LoginPage(): JSX.Element {
         }
       })
       .catch(error => {
-        console.log(error)
+        console.log(console.error)
         //TODO: escrever mesnagem de erro de login
       })
   };
