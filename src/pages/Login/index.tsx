@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import * as Styled from './styled';
+// Resto do seu código JSX
 import { useNavigate } from 'react-router';
 import RotateBanner from '../../components/RotateBanner';
 import { login } from '../../services/axios';
@@ -10,7 +11,7 @@ type FormValues = {
   password: string;
 };
 
-export function LoginPage(): JSX.Element {
+export function LoginPage(){
   const { register, handleSubmit, formState } = useForm<FormValues>();
   const navigate = useNavigate();
 
