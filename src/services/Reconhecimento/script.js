@@ -1,3 +1,7 @@
+import * as faceapi from 'face-api.js';
+
+// Agora você pode usar 'faceapi' no seu código
+
 const video = document.getElementById("video");
 
 

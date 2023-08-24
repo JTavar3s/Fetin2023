@@ -11,10 +11,6 @@ import image2 from '../../assets/image/matheus.png'
 import image3 from '../../assets/image/joao.png'
 import image4 from '../../assets/image/gustavo.png'
 
-export function chamandoReconhecimento(){
-  const navigate = useNavigate();
-}
-
 export function Home(): JSX.Element {
   const navigate = useNavigate();
 
