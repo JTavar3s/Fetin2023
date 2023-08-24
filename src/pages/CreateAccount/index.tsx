@@ -34,9 +34,7 @@ export function CreateAccount(): JSX.Element {
     signup(user)
       .then(resp => {
         console.log(resp)
-        if(resp.data.register){
-          localStorage.setItem('register', JSON.stringify(resp.data.register));
-          localStorage.setItem('resident', JSON.stringify(resp.data.resident));
+        if(resp.data){
           navigate('/')
         }
       })
@@ -120,7 +118,7 @@ export function CreateAccount(): JSX.Element {
             <Styled.Button onClick={() => navigate(`/`)} disabled={formState.isSubmitting}>
               {formState.isSubmitting ? 'Aguarde...' : 'voltar'}
             </Styled.Button>
-            <Styled.Button onClick={() => navigate('/') } type="submit" disabled={formState.isSubmitting}>
+            <Styled.Button  type="submit" disabled={formState.isSubmitting}>
               {formState.isSubmitting ? 'Aguarde...' : 'cadastrar'}
             </Styled.Button>
           </Styled.divButton>

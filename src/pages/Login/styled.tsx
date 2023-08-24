@@ -29,9 +29,10 @@ export const divButton = styled.div`
   gap: 14px;
 `;
 
-export const Title = styled.h1`
+export const Title = styled.h3`
   font-size: 22px;
-  margin: 0px 0px 16px 20px;
+  text-align: center;
+  margin: center;
 `;
 
 export const Text1 = styled.div`

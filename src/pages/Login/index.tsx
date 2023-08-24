@@ -25,7 +25,6 @@ export function LoginPage(){
         console.log(resp)
         if(resp.data){
           localStorage.setItem('user', JSON.stringify(resp.data));
-          localStorage.setItem('resident', JSON.stringify(resp.data.resident));
           navigate('/home')
         }
       })
@@ -34,7 +33,7 @@ export function LoginPage(){
         Swal.fire({
           title: 'Login ou Senha incorretos',
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: 'Login ou senha inválidas'
           },
           hideClass: {
             popup: 'animate__animated animate__fadeOutUp'
